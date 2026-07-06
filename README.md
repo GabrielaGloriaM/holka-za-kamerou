@@ -1,2 +1,5 @@
-# holka-za-kamerou
-Webová stránka Gabriely Macečkové, Holky za kamerou, video maker v Ostravě
+# Holka za kamerou
+
+Osobní web Gabriely Macečkové - Holka za kamerou.
+
+Statický web připravený pro GitHub Pages.

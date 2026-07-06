@@ -1,0 +1,1309 @@
+﻿<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Holka za kamerou | Reels, grafika a event obsah</title>
+  <meta name="description" content="Osobni tvorba reelsek, social media grafiky a obsahu z eventu pro znacky, podnikatelky a projekty, ktere chteji byt vic videt.">
+  <style>
+    :root {
+      --ink: #ffffff;
+      --muted: #ededed;
+      --paper: #0a0a0a;
+      --panel: #101010;
+      --lemon: #fec900;
+      --fog: #ededed;
+      --charcoal: #242424;
+      --line: rgba(237, 237, 237, .18);
+      --shadow: 0 24px 70px rgba(0, 0, 0, .55);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, .018) 0 1px, transparent 1px 5px),
+        radial-gradient(circle at 72% 8%, rgba(254, 201, 0, .14), transparent 34rem),
+        linear-gradient(180deg, #0a0a0a 0%, #050505 100%);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .wrap {
+      width: min(1190px, calc(100% - 44px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 20;
+      background: transparent;
+      border-bottom: 0;
+      backdrop-filter: none;
+    }
+
+    .nav::before {
+      content: "WEB";
+      position: absolute;
+      left: 22px;
+      top: 14px;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: .08em;
+    }
+
+    .nav-inner {
+      min-height: 96px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding-top: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .brand span:last-child {
+      display: grid;
+      line-height: .82;
+      color: #fff;
+      font-family: "Segoe Script", "Brush Script MT", cursive;
+      font-size: clamp(31px, 3.4vw, 54px);
+      font-style: italic;
+      letter-spacing: 0;
+      text-shadow: 0 3px 18px rgba(0, 0, 0, .7);
+    }
+
+    .brand span:last-child::after {
+      content: "za kamerou  ● REC";
+      margin-top: 2px;
+      color: #fff;
+      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      font-size: 9px;
+      font-style: normal;
+      font-weight: 900;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .brand span:last-child::first-letter {
+      letter-spacing: -.05em;
+    }
+
+    .brand-mark {
+      display: none;
+    }
+
+    .brand-mark::after {
+      content: "";
+      width: 8px;
+      height: 8px;
+      margin-left: 4px;
+      border-radius: 50%;
+      background: var(--lemon);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(10px, 2vw, 24px);
+      flex: 1 1 auto;
+      color: var(--muted);
+      font-size: clamp(7px, .82vw, 10px);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      white-space: nowrap;
+    }
+
+    .nav .button {
+      min-height: 34px;
+      padding: 0 17px;
+      flex: 0 0 auto;
+      font-size: clamp(8px, .84vw, 10px);
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border: 1px solid var(--lemon);
+      border-radius: 0;
+      background: var(--lemon);
+      color: #0a0a0a;
+      font-size: 12px;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      box-shadow: none;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 6px 6px 0 #ffffff;
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--fog);
+      box-shadow: none;
+    }
+
+    .hero {
+      position: relative;
+      min-height: min(760px, 100svh);
+      display: grid;
+      align-items: center;
+      padding: 108px 0 40px;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background:
+        linear-gradient(90deg, rgba(0, 0, 0, .98) 0%, rgba(0, 0, 0, .94) 38%, rgba(0, 0, 0, .55) 66%, rgba(0, 0, 0, .94) 100%),
+        radial-gradient(circle at 80% 45%, rgba(254, 201, 0, .16), transparent 27rem);
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+      opacity: .9;
+    }
+
+    .hero::before {
+      width: min(390px, 32vw);
+      height: 150px;
+      right: 9%;
+      top: 28%;
+      background: var(--lemon);
+      transform: rotate(-8deg);
+      clip-path: polygon(5% 0, 100% 10%, 83% 38%, 100% 58%, 76% 100%, 0 87%, 14% 51%, 0 24%);
+      mix-blend-mode: normal;
+      opacity: .95;
+    }
+
+    .hero::after {
+      width: min(320px, 24vw);
+      height: 255px;
+      right: 1%;
+      bottom: 4%;
+      background: repeating-linear-gradient(-16deg, rgba(254, 201, 0, .65) 0 10px, transparent 10px 23px);
+      filter: blur(.2px);
+      opacity: .5;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: .88fr 1.12fr;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .hero .eyebrow {
+      display: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 20px;
+      color: var(--lemon);
+      font-size: 14px;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 2px;
+      background: var(--lemon);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin-bottom: 28px;
+      font-family: Impact, "Arial Black", Haettenschweiler, "Helvetica Neue", sans-serif;
+      font-size: clamp(58px, 8.7vw, 120px);
+      line-height: .78;
+      letter-spacing: .01em;
+      text-transform: uppercase;
+      text-shadow: 0 3px 0 rgba(255, 255, 255, .08), 0 12px 38px rgba(0, 0, 0, .7);
+    }
+
+    .title-line {
+      display: block;
+    }
+
+    .title-highlight {
+      display: inline-block;
+      padding: .01em .12em .08em;
+      background: var(--lemon);
+      color: #0a0a0a;
+      transform: rotate(-1.5deg) translateX(-5px);
+    }
+
+    .lead {
+      max-width: 630px;
+      color: var(--muted);
+      font-size: clamp(18px, 1.8vw, 24px);
+      font-weight: 900;
+      line-height: 1.08;
+      text-transform: uppercase;
+    }
+
+    .lead strong {
+      color: var(--lemon);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 24px;
+      margin: 30px 0 0;
+    }
+
+    .hero .button {
+      min-height: 38px;
+      padding: 0 22px;
+      font-size: 10px;
+    }
+
+    .hero .button.secondary {
+      min-height: 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: #fff;
+      font-size: 10px;
+      box-shadow: none;
+    }
+
+    .hero .button.secondary::after {
+      content: " →";
+      color: var(--lemon);
+    }
+
+    .stats {
+      display: none;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      max-width: 620px;
+    }
+
+    .stat {
+      padding: 18px;
+      border: 1px solid var(--charcoal);
+      border-radius: 0;
+      background: #111;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 26px;
+      line-height: 1;
+      color: var(--lemon);
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .phone-stage {
+      position: relative;
+      min-height: 518px;
+      display: grid;
+      place-items: center;
+    }
+
+    .phone-stage::before {
+      content: "";
+      position: absolute;
+      inset: 9% 2% 1% 23%;
+      background:
+        linear-gradient(135deg, rgba(254, 201, 0, .28), transparent 48%),
+        repeating-linear-gradient(-18deg, rgba(254, 201, 0, .22) 0 8px, transparent 8px 18px);
+      border-radius: 0;
+      transform: rotate(-8deg);
+    }
+
+    .phone {
+      position: relative;
+      width: min(690px, 58vw);
+      aspect-ratio: 1.26 / 1;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: #161313;
+      box-shadow: none;
+      overflow: hidden;
+    }
+
+    .phone::before,
+    .phone::after,
+    .phone-screen::before,
+    .phone-screen::after {
+      content: "";
+      position: absolute;
+      z-index: 2;
+      width: 42px;
+      height: 42px;
+      pointer-events: none;
+    }
+
+    .phone::before {
+      left: 18px;
+      top: 22px;
+      border-left: 2px solid #fff;
+      border-top: 2px solid #fff;
+    }
+
+    .phone::after {
+      right: 18px;
+      top: 22px;
+      border-right: 2px solid #fff;
+      border-top: 2px solid #fff;
+    }
+
+    .phone-screen::before {
+      left: 18px;
+      bottom: 22px;
+      border-left: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+    }
+
+    .phone-screen::after {
+      right: 18px;
+      bottom: 22px;
+      border-right: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+    }
+
+    .phone-screen {
+      position: relative;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 0;
+      background: #0a0a0a;
+    }
+
+    .phone-screen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 43% 48%;
+      filter: grayscale(1) contrast(1.42) brightness(.68);
+    }
+
+    .phone-screen .paint {
+      position: absolute;
+      inset: 4% -5% 7% auto;
+      width: 50%;
+      background: var(--lemon);
+      mix-blend-mode: screen;
+      clip-path: polygon(18% 0, 100% 8%, 78% 34%, 100% 48%, 73% 100%, 10% 92%, 24% 55%, 0 36%);
+      opacity: .9;
+    }
+
+    .reel-ui {
+      position: absolute;
+      inset: 95px auto auto 34px;
+      color: #fff;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, .55);
+    }
+
+    .reel-ui b {
+      display: block;
+      padding: 6px 10px;
+      background: #0a0a0a;
+      border: 1px solid rgba(255, 255, 255, .45);
+      font-size: 17px;
+      color: var(--lemon);
+      text-transform: uppercase;
+    }
+
+    .reel-ui span {
+      display: none;
+      margin-top: 5px;
+      font-size: 14px;
+      opacity: .86;
+    }
+
+    .floating-note {
+      display: none;
+    }
+
+    section {
+      padding: 92px 0;
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: .86fr 1fr;
+      gap: 38px;
+      align-items: end;
+      margin-bottom: 36px;
+    }
+
+    .section-heading h2 {
+      margin-bottom: 0;
+      font-family: Impact, "Arial Black", Haettenschweiler, "Helvetica Neue", sans-serif;
+      font-size: clamp(34px, 4vw, 58px);
+      line-height: .92;
+      text-transform: uppercase;
+    }
+
+    .section-heading p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0;
+      border: 1px solid var(--line);
+    }
+
+    .card {
+      min-height: 100%;
+      padding: 26px;
+      border: 1px solid var(--charcoal);
+      border-radius: 0;
+      background: #f4efe8;
+      color: #0a0a0a;
+      box-shadow: none;
+    }
+
+    .card.featured {
+      background:
+        linear-gradient(rgba(0, 0, 0, .24), rgba(0, 0, 0, .84)),
+        url("https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=900&q=82") center/cover;
+      color: var(--lemon);
+    }
+
+    .card.featured p,
+    .card.featured li {
+      color: rgba(255, 255, 255, .78);
+    }
+
+    .icon {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 22px;
+      border: 1px solid var(--lemon);
+      border-radius: 0;
+      background: #0a0a0a;
+      color: var(--lemon);
+      font-weight: 950;
+    }
+
+    .card:not(.featured) .icon {
+      background: var(--lemon);
+      color: #0a0a0a;
+      border-color: #0a0a0a;
+    }
+
+    .card h3 {
+      margin-bottom: 12px;
+      font-size: 24px;
+      line-height: 1.12;
+      text-transform: uppercase;
+    }
+
+    .card p {
+      color: #2b2b2b;
+    }
+
+    .card ul {
+      padding-left: 18px;
+      margin: 20px 0 0;
+      color: #2b2b2b;
+    }
+
+    .card li + li {
+      margin-top: 8px;
+    }
+
+    .work-band {
+      background: #050505;
+      border-block: 1px solid var(--line);
+    }
+
+    .reels-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .reel-card {
+      position: relative;
+      aspect-ratio: 9 / 16;
+      overflow: hidden;
+      border: 1px solid var(--charcoal);
+      border-radius: 0;
+      background: #111;
+      box-shadow: 0 20px 46px rgba(48, 35, 28, .16);
+    }
+
+    .reel-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(180deg, rgba(0, 0, 0, .08), rgba(0, 0, 0, .74));
+      pointer-events: none;
+    }
+
+    .reel-card:nth-child(1) {
+      background: var(--lemon);
+    }
+
+    .reel-card:nth-child(1)::before {
+      background: none;
+    }
+
+    .reel-card:nth-child(1) img {
+      display: none;
+    }
+
+    .reel-card:nth-child(1)::after {
+      content: "TOČÍME. STŘÍHÁME. DÁVÁ TO SMYSL.";
+      position: absolute;
+      inset: 54px 18px auto;
+      color: #0a0a0a;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: .92;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+
+    .reel-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(1) contrast(1.12);
+      transition: transform .5s ease;
+    }
+
+    .reel-card:hover img {
+      transform: scale(1.06);
+    }
+
+    .reel-label {
+      position: absolute;
+      z-index: 3;
+      inset: auto 12px 12px;
+      padding: 12px;
+      border: 1px solid var(--lemon);
+      border-radius: 0;
+      background: rgba(10, 10, 10, .88);
+      backdrop-filter: blur(12px);
+    }
+
+    .reel-label b,
+    .reel-label span {
+      display: block;
+    }
+
+    .reel-label span {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .reel-label b {
+      color: var(--lemon);
+      text-transform: uppercase;
+    }
+
+    .play {
+      position: absolute;
+      z-index: 3;
+      top: 14px;
+      right: 14px;
+      width: auto;
+      height: 28px;
+      padding: 0 10px;
+      display: grid;
+      place-items: center;
+      border-radius: 0;
+      background: var(--lemon);
+      color: #0a0a0a;
+      font-size: 11px;
+      font-weight: 950;
+      letter-spacing: .08em;
+    }
+
+    .process {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      counter-reset: steps;
+    }
+
+    .step {
+      padding: 24px;
+      border-top: 2px solid var(--lemon);
+      background: #101010;
+    }
+
+    .step::before {
+      counter-increment: steps;
+      content: "0" counter(steps);
+      display: block;
+      margin-bottom: 18px;
+      color: var(--lemon);
+      font-weight: 900;
+    }
+
+    .step h3 {
+      margin-bottom: 8px;
+      font-size: 20px;
+    }
+
+    .step p {
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .about {
+      display: grid;
+      grid-template-columns: .82fr 1.18fr;
+      gap: 42px;
+      align-items: center;
+    }
+
+    .portrait {
+      overflow: hidden;
+      border: 1px solid var(--charcoal);
+      border-radius: 0;
+      box-shadow: var(--shadow);
+    }
+
+    .portrait img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+    }
+
+    .about h2 {
+      margin-bottom: 20px;
+      font-family: Impact, "Arial Black", Haettenschweiler, "Helvetica Neue", sans-serif;
+      font-size: clamp(34px, 4vw, 56px);
+      line-height: .92;
+      text-transform: uppercase;
+    }
+
+    .about p {
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .quotes {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    blockquote {
+      margin: 0;
+      padding: 26px;
+      border: 1px solid var(--charcoal);
+      border-radius: 0;
+      background: #101010;
+      box-shadow: none;
+    }
+
+    blockquote p {
+      margin-bottom: 18px;
+      font-size: 17px;
+    }
+
+    cite {
+      color: var(--lemon);
+      font-style: normal;
+      font-weight: 850;
+    }
+
+    .cta {
+      padding: 78px 0;
+      background: #0a0a0a;
+      border-top: 1px solid var(--lemon);
+      color: #fff;
+    }
+
+    .cta-grid {
+      display: grid;
+      grid-template-columns: 1fr .8fr;
+      gap: 38px;
+      align-items: center;
+    }
+
+    .cta h2 {
+      margin-bottom: 14px;
+      font-family: Impact, "Arial Black", Haettenschweiler, "Helvetica Neue", sans-serif;
+      font-size: clamp(34px, 4vw, 58px);
+      line-height: .92;
+      text-transform: uppercase;
+    }
+
+    .cta p {
+      color: rgba(255, 255, 255, .76);
+      font-size: 18px;
+    }
+
+    .contact-box {
+      padding: 28px;
+      border-radius: 0;
+      background: #111;
+      border: 1px solid var(--charcoal);
+    }
+
+    .contact-box a {
+      display: block;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .16);
+      font-weight: 800;
+    }
+
+    .contact-box a:last-child {
+      border-bottom: 0;
+    }
+
+    footer {
+      padding: 28px 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .tag-strip {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: #050505;
+    }
+
+    .tag-strip .wrap {
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .tag-strip span::after {
+      content: "";
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      margin-left: 14px;
+      border-radius: 50%;
+      background: var(--lemon);
+      vertical-align: middle;
+    }
+
+    .tag-strip span:last-child::after {
+      display: none;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      .nav-links {
+        display: flex;
+        gap: 9px;
+        font-size: 7px;
+        letter-spacing: .04em;
+      }
+
+      .nav {
+        position: absolute;
+      }
+
+      .nav-inner {
+        min-height: 78px;
+        gap: 10px;
+      }
+
+      .brand span:last-child {
+        font-size: 28px;
+      }
+
+      .brand span:last-child::after {
+        font-size: 7px;
+        letter-spacing: .08em;
+      }
+
+      .nav .button {
+        min-height: 30px;
+        padding: 0 10px;
+        font-size: 7px;
+      }
+
+      .hero-grid,
+      .section-heading,
+      .about,
+      .cta-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 110px;
+      }
+
+      .hero::before {
+        width: 70vw;
+        right: -12vw;
+        top: 43%;
+      }
+
+      .hero::after {
+        width: 58vw;
+        right: -18vw;
+      }
+
+      .phone-stage {
+        min-height: 560px;
+      }
+
+      .phone {
+        width: min(620px, 100%);
+      }
+
+      .services,
+      .quotes {
+        grid-template-columns: 1fr;
+      }
+
+      .reels-grid,
+      .process {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 560px) {
+      .wrap {
+        width: min(100% - 24px, 1140px);
+      }
+
+      .nav-inner {
+        min-height: 112px;
+        gap: 8px 10px;
+        flex-wrap: wrap;
+        align-content: center;
+      }
+
+      .brand span:last-child {
+        font-size: 23px;
+      }
+
+      .brand span:last-child::after {
+        font-size: 6px;
+      }
+
+      .nav-links {
+        display: flex;
+        order: 3;
+        flex: 1 0 100%;
+        justify-content: space-between;
+        gap: 7px;
+        font-size: 7px;
+        letter-spacing: 0;
+      }
+
+      .nav .button {
+        min-height: 26px;
+        padding: 0 8px;
+        font-size: 6px;
+      }
+
+      .hero {
+        padding-top: 138px;
+      }
+
+      h1 {
+        font-size: clamp(48px, 15vw, 70px);
+      }
+
+      .lead {
+        font-size: 17px;
+      }
+
+      .stats,
+      .reels-grid,
+      .process {
+        grid-template-columns: 1fr;
+      }
+
+      .phone-stage {
+        min-height: 420px;
+      }
+
+      .phone {
+        width: 100%;
+        aspect-ratio: 1 / 1.08;
+      }
+
+      .phone-screen img {
+        object-position: 44% 50%;
+      }
+
+      .floating-note {
+        left: 0;
+        right: auto;
+        bottom: 18px;
+        width: min(230px, 74vw);
+      }
+
+      section {
+        padding: 68px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top" aria-label="Holka za kamerou">
+        <span class="brand-mark">H</span>
+        <span>Holka</span>
+      </a>
+      <nav class="nav-links" aria-label="Hlavni navigace">
+        <a href="#omne">O mně</a>
+        <a href="#sluzby">Co točím</a>
+        <a href="#ukazky">Ukázky</a>
+        <a href="#proces">Spolupráce</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+      <a class="button" href="mailto:gabriela.maceckova@seznam.cz">Chci video</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow">REC / reels / grafika / event obsah</p>
+          <h1>
+            <span class="title-line">Jsem tvoje</span>
+            <span class="title-line title-highlight">holka</span>
+            <span class="title-line">za kamerou.</span>
+          </h1>
+          <p class="lead">Pojďme spolu tvořit!</p>
+          <div class="hero-actions">
+            <a class="button" href="#kontakt">Chci video</a>
+            <a class="button secondary" href="#ukazky">Kouknout na práci</a>
+          </div>
+          <div class="stats" aria-label="Rychle informace">
+            <div class="stat">
+              <strong>REC</strong>
+              <span>reels formát pro Instagram i TikTok</span>
+            </div>
+            <div class="stat">
+              <strong>48 h</strong>
+              <span>rychlý návrh směru a scénáře</span>
+            </div>
+            <div class="stat">
+              <strong>1 den</strong>
+              <span>backstage, rozhovory, promo i střih</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="phone-stage" aria-label="Ukazka reel videa">
+          <div class="phone">
+            <div class="phone-screen">
+              <img src="assets/hero-kameramenka.jpg" alt="Kameramenka s kamerou">
+              <span class="paint" aria-hidden="true"></span>
+              <div class="reel-ui">
+                <b>REC / behind the scenes</b>
+                <span>střih / titulky / hudba / pointa</span>
+              </div>
+            </div>
+          </div>
+          <div class="floating-note">Nemusíš mít dokonalý scénář. Stačí opravdový příběh.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sluzby">
+      <div class="wrap">
+        <div class="section-heading">
+          <h2>Co točím</h2>
+          <p>Točím videa, která mají smysl a přesah. Nechci tvořit obsah jen proto, aby něco prodával nebo zaplnil feed. Zajímají mě příběhy, témata a projekty, které v lidech něco probudí — emoci, otázku, zájem nebo chuť něco změnit. Video pro mě není jen forma propagace, ale způsob, jak předat myšlenku, která má společenský význam.</p>
+        </div>
+
+        <div class="services">
+          <article class="card featured">
+            <div class="icon">01</div>
+            <h3>Reels a krátká videa</h3>
+            <p><strong>Tvořím krátká videa, která mají důvod existovat.</strong></p>
+            <p>Za každým videem hledám myšlenku, emoci, jasné sdělení a kreativní způsob, jak ho předat. Nechci tvořit další reelsko do počtu. Chci, aby video diváka zastavilo, něco mu předalo a mělo smysl i za hranicí algoritmu.</p>
+            <ul>
+              <li>nápad, scénář a shotlist</li>
+              <li>natáčení mobilem nebo kamerou</li>
+              <li>střih, titulky, hudba a finální exporty</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="icon">02</div>
+            <h3>Brand & komplexní strategie</h3>
+            <p><strong>Brand & komplexní strategie</strong></p>
+            <p>Pomůžu pojmenovat, jak má značka působit, komu mluví, co chce říkat a jak to celé převést do obsahu, který drží pohromadě. Ne jen jeden post. Směr, který dává smysl dlouhodobě.</p>
+            <p>Do mé úzké profilace spadá také politický marketing. Mám za sebou několik velkých kampaní a umím vytáhnout autentickou komunikaci lídra.</p>
+            <p>Pomůžu pojmenovat vaše témata, zostřit sdělení a přeložit programové priority tak, aby byly srozumitelné, zapamatovatelné a měly šanci rezonovat ve společnosti.</p>
+            <ul>
+              <li>brand směr a tone of voice</li>
+              <li>definice cílové skupiny a její potřeby</li>
+              <li>mapování konkurence a SWOT analýza</li>
+              <li>obsahová strategie pro sítě</li>
+              <li>propojení videa, grafiky a kampaní</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="icon">03</div>
+            <h3>Grafika pro sítě</h3>
+            <p><strong>Grafika pro sítě</strong></p>
+            <p>Vytvořím grafiku, která drží styl a dá se používat dlouhodobě. Ať už potřebujete šablony v Canvě, které si pak budete spravovat sami, nebo grafiku na zakázku pro konkrétní kampaň, akci či projekt.</p>
+            <p>Do videí umím doplnit i jednoduché grafické prvky, titulky nebo vizuály, které podpoří sdělení a sjednotí celý obsah.</p>
+            <ul>
+              <li>carousel posty a story sety</li>
+              <li>highlight covery a mini kampaně</li>
+              <li>vizuální systém, který se dá používat opakovaně</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="icon">04</div>
+            <h3>Event content & management</h3>
+            <p><strong>Event content & management</strong></p>
+            <p>Potřebujete na akci ruku, která vám uvolní ruce? Pomůžu s přípravou, organizací i obsahem — aby se neztratily důležité úkoly, provozní detaily ani momenty, které stojí za to zachytit.</p>
+            <p>Pohlídám harmonogram, rozdělení práce, tok lidí i drobnosti na místě. A zároveň z akce vytěžím obsah, který bude žít i po jejím skončení.</p>
+            <ul>
+              <li>WBS, harmonogram a rozdělení úkolů</li>
+              <li>provozní detaily na místě včetně značení, toku lidí a koordinace</li>
+              <li>foto, video a follow-up obsah po eventu</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="work-band" id="ukazky">
+      <div class="wrap">
+        <div class="section-heading">
+          <h2>Ukázky směru</h2>
+          <p>Každý výstup má mít jasnou práci: zastavit scroll, ukázat atmosféru, vysvětlit nabídku nebo prodat moment. Hezké video nestačí. Musí být použitelné.</p>
+        </div>
+
+        <div class="reels-grid">
+          <article class="reel-card">
+            <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=700&q=82" alt="Atmosféra eventu s osvětlením">
+            <span class="play">REC</span>
+            <div class="reel-label">
+              <b>Backstage z akce</b>
+              <span>energie, lidi, atmosféra</span>
+            </div>
+          </article>
+          <article class="reel-card">
+              <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=700&q=82" alt="Pracovní schůzka a tvorba strategie">
+            <span class="play">REC</span>
+            <div class="reel-label">
+              <b>Pravda místo pózy</b>
+              <span>obsah bez křeče</span>
+            </div>
+          </article>
+          <article class="reel-card">
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=700&q=82" alt="Notebook při tvorbě grafiky">
+            <span class="play">REC</span>
+            <div class="reel-label">
+              <b>Stříhám a dávám tomu smysl</b>
+              <span>tempo, titulky, pointa</span>
+            </div>
+          </article>
+          <article class="reel-card">
+            <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=700&q=82" alt="Lidé na společenské akci">
+            <span class="play">REC</span>
+            <div class="reel-label">
+              <b>Hledej moment</b>
+              <span>protože dokonalost nudí</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="proces">
+      <div class="wrap">
+        <div class="section-heading">
+          <h2>Jak spolupráce probíhá</h2>
+          <p>Nejdřív si zavoláme nebo se potkáme. Řekneme si, co vlastně potřebujete — co má být cílem videa, kdo je cílovka, proč to má někoho zajímat a co se s tím má stát dál.</p>
+          <p>Domluvíme termíny, dáme dohromady scénář a společně ho odladíme. Pak se jde natáčet.</p>
+          <p>Video dodám hotové a vy mi k němu můžete dát zpětnou vazbu. Pokud bude potřeba, doladím detaily tak, aby výsledek seděl vám i tomu, co jsme si na začátku řekli.</p>
+        </div>
+
+        <div class="process">
+          <article class="step">
+            <h3>Úvodní domluva</h3>
+            <p>Zavoláme si nebo se potkáme. Ujasníme si cíl videa, cílovku, hlavní sdělení a co se má s obsahem stát dál.</p>
+          </article>
+          <article class="step">
+            <h3>Scénář a termíny</h3>
+            <p>Dáme dohromady scénář, domluvíme termíny a společně doladíme, co se bude natáčet a proč.</p>
+          </article>
+          <article class="step">
+            <h3>Natáčení</h3>
+            <p>Přijedu na místo, povedu tě záběrem a natočím materiál tak, aby měl emoci, směr a jasnou pointu.</p>
+          </article>
+          <article class="step">
+            <h3>Předání a ladění</h3>
+            <p>Dodám hotové video, vy mi dáte zpětnou vazbu a případně doladím detaily, aby výsledek seděl zadání.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="omne">
+      <div class="wrap about">
+        <div class="portrait">
+          <img src="assets/hero-flying-camera-woman.png" alt="Kameramenka s letícím fotoaparátem">
+        </div>
+        <div>
+          <p class="eyebrow">O mně</p>
+          <h2>Vidím momenty, které by ostatní klidně nechali utéct.</h2>
+          <p>Jsem holka za kamerou pro značky, podnikatele a akce, které nechtějí vypadat jako všichni ostatní. Hledám přirozenost, detail, energii a trochu drzosti. Protože uhlazený obsah bez názoru dneska nikoho nezvedne ze židle.</p>
+          <p>Umím být nenápadná v pozadí, když je potřeba lovit realitu. A umím převzít režii, když někdo potřebuje slyšet: „Prosím tě, řekni mi, co mám dělat, ať to nevypadá trapně.“</p>
+          <a class="button secondary" href="#kontakt">Napsat poptávku</a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-heading">
+          <h2>Reference</h2>
+          <p>Reference mám vyžádané a doplním je hned, jak dorazí. Nechci si tady vymýšlet hezké věty do počtu — radši počkám na opravdová slova od lidí, se kterými jsem pracovala.</p>
+        </div>
+        <div class="quotes">
+          <blockquote>
+            <p>V progresu.</p>
+            <cite>Pavlína Polášková</cite>
+          </blockquote>
+          <blockquote>
+            <p>V progresu.</p>
+            <cite>Ondřej Jahoda</cite>
+          </blockquote>
+          <blockquote>
+            <p>V progresu.</p>
+            <cite>Kateřina Trávníček</cite>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="kontakt">
+      <div class="wrap cta-grid">
+        <div>
+          <h2>Pojďme natočit něco, co bude mít koule.</h2>
+          <p>Napište mi, co děláte a co chcete lidem ukázat. Klidně i to, kde se v tom teď ztrácíte. Mrknu na to a navrhnu, co má smysl udělat jako první — strategicky, vizuálně i obsahově.</p>
+          <a class="button" href="mailto:gabriela.maceckova@seznam.cz?subject=Poptavka%20obsahu">Poslat poptávku</a>
+        </div>
+        <div class="contact-box" aria-label="Kontaktni informace">
+          <a href="mailto:gabriela.maceckova@seznam.cz">gabriela.maceckova@seznam.cz</a>
+          <a href="tel:+420732892370">+420 732 892 370</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="tag-strip" aria-label="Služby v kostce">
+    <div class="wrap">
+      <span>scénář</span>
+      <span>natáčení</span>
+      <span>střih</span>
+      <span>titulky</span>
+      <span>reels</span>
+      <span>brand</span>
+      <span>strategie</span>
+      <span>reportáže</span>
+      <span>rozhovory</span>
+      <span>promo</span>
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <span>© 2026 Holka za kamerou</span>
+      <span>Reels / grafika / event obsah</span>
+    </div>
+  </footer>
+</body>
+</html>
+
