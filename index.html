@@ -824,6 +824,63 @@
       border-bottom: 0;
     }
 
+    .lead-form {
+      margin-top: 24px;
+      padding: 24px;
+      border: 1px solid var(--charcoal);
+      background: #111;
+    }
+
+    .lead-form label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--lemon);
+      font-family: Impact, "Arial Black", Haettenschweiler, "Helvetica Neue", sans-serif;
+      font-size: 14px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .lead-form input,
+    .lead-form select,
+    .lead-form textarea {
+      width: 100%;
+      min-height: 48px;
+      margin-bottom: 16px;
+      padding: 13px 14px;
+      border: 1px solid rgba(255, 255, 255, .22);
+      border-radius: 0;
+      background: #070707;
+      color: #fff;
+      font: inherit;
+      outline: none;
+    }
+
+    .lead-form textarea {
+      min-height: 132px;
+      resize: vertical;
+    }
+
+    .lead-form input:focus,
+    .lead-form select:focus,
+    .lead-form textarea:focus {
+      border-color: var(--lemon);
+      box-shadow: 0 0 0 3px rgba(254, 201, 0, .15);
+    }
+
+    .lead-form .button {
+      width: 100%;
+      justify-content: center;
+      border: 0;
+      cursor: pointer;
+    }
+
+    .form-note {
+      margin-top: 14px;
+      color: rgba(255, 255, 255, .62);
+      font-size: 14px;
+    }
+
     footer {
       padding: 28px 0;
       color: var(--muted);
@@ -1040,7 +1097,7 @@
         <a href="#proces">Spolupráce</a>
         <a href="#kontakt">Kontakt</a>
       </nav>
-      <a class="button" href="mailto:gabriela.maceckova@seznam.cz">Chci video</a>
+      <a class="button" href="#kontakt">Poptat spolupráci</a>
     </div>
   </header>
 
@@ -1056,7 +1113,7 @@
           </h1>
           <p class="lead">Pojďme spolu tvořit!</p>
           <div class="hero-actions">
-            <a class="button" href="#kontakt">Chci video</a>
+            <a class="button" href="#kontakt">Poptat spolupráci</a>
             <a class="button secondary" href="#ukazky">Kouknout na práci</a>
           </div>
           <div class="stats" aria-label="Rychle informace">
@@ -1114,8 +1171,7 @@
           <article class="card">
             <div class="icon">02</div>
             <h3>Brand & komplexní strategie</h3>
-            <p><strong>Brand & komplexní strategie</strong></p>
-            <p>Pomůžu pojmenovat, jak má značka působit, komu mluví, co chce říkat a jak to celé převést do obsahu, který drží pohromadě. Ne jen jeden post. Směr, který dává smysl dlouhodobě.</p>
+            <p>Pomůžu pojmenovat, jak má značka působit, ke komu mluví, co chce říkat a jak to celé převést do obsahu, který drží pohromadě. Ne jen jeden post. Směr, který dává smysl dlouhodobě.</p>
             <p>Do mé úzké profilace spadá také politický marketing. Mám za sebou několik velkých kampaní a umím vytáhnout autentickou komunikaci lídra.</p>
             <p>Pomůžu pojmenovat vaše témata, zostřit sdělení a přeložit programové priority tak, aby byly srozumitelné, zapamatovatelné a měly šanci rezonovat ve společnosti.</p>
             <ul>
@@ -1130,7 +1186,6 @@
           <article class="card">
             <div class="icon">03</div>
             <h3>Grafika pro sítě</h3>
-            <p><strong>Grafika pro sítě</strong></p>
             <p>Vytvořím grafiku, která drží styl a dá se používat dlouhodobě. Ať už potřebujete šablony v Canvě, které si pak budete spravovat sami, nebo grafiku na zakázku pro konkrétní kampaň, akci či projekt.</p>
             <p>Do videí umím doplnit i jednoduché grafické prvky, titulky nebo vizuály, které podpoří sdělení a sjednotí celý obsah.</p>
             <ul>
@@ -1143,7 +1198,6 @@
           <article class="card">
             <div class="icon">04</div>
             <h3>Event content & management</h3>
-            <p><strong>Event content & management</strong></p>
             <p>Potřebujete na akci ruku, která vám uvolní ruce? Pomůžu s přípravou, organizací i obsahem — aby se neztratily důležité úkoly, provozní detaily ani momenty, které stojí za to zachytit.</p>
             <p>Pohlídám harmonogram, rozdělení práce, tok lidí i drobnosti na místě. A zároveň z akce vytěžím obsah, který bude žít i po jejím skončení.</p>
             <ul>
@@ -1240,7 +1294,7 @@
           <h2>Vidím momenty, které by ostatní klidně nechali utéct.</h2>
           <p>Jsem holka za kamerou pro značky, podnikatele a akce, které nechtějí vypadat jako všichni ostatní. Hledám přirozenost, detail, energii a trochu drzosti. Protože uhlazený obsah bez názoru dneska nikoho nezvedne ze židle.</p>
           <p>Umím být nenápadná v pozadí, když je potřeba lovit realitu. A umím převzít režii, když někdo potřebuje slyšet: „Prosím tě, řekni mi, co mám dělat, ať to nevypadá trapně.“</p>
-          <a class="button secondary" href="#kontakt">Napsat poptávku</a>
+          <a class="button secondary" href="#kontakt">Poptat spolupráci</a>
         </div>
       </div>
     </section>
@@ -1273,11 +1327,52 @@
         <div>
           <h2>Pojďme natočit něco, co bude mít koule.</h2>
           <p>Napište mi, co děláte a co chcete lidem ukázat. Klidně i to, kde se v tom teď ztrácíte. Mrknu na to a navrhnu, co má smysl udělat jako první — strategicky, vizuálně i obsahově.</p>
-          <a class="button" href="mailto:gabriela.maceckova@seznam.cz?subject=Poptavka%20obsahu">Poslat poptávku</a>
+          <a class="button" href="#poptavka-form">Poptat spolupráci</a>
+          <form class="lead-form" id="poptavka-form">
+            <label for="name">Jméno</label>
+            <input id="name" name="name" type="text" autocomplete="name" required>
+
+            <label for="email">E-mail</label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+
+            <label for="service">Co potřebujete?</label>
+            <select id="service" name="service" required>
+              <option value="">Vyberte typ spolupráce</option>
+              <option>Reels a krátká videa</option>
+              <option>Brand & komplexní strategie</option>
+              <option>Grafika pro sítě</option>
+              <option>Event content & management</option>
+              <option>Politický marketing</option>
+              <option>Ještě přesně nevím</option>
+            </select>
+
+            <label for="deadline">Do kdy to potřebujete?</label>
+            <input id="deadline" name="deadline" type="text" placeholder="Např. do konce měsíce, na konkrétní event, nespěchá">
+
+            <label for="budget">Orientační budget</label>
+            <select id="budget" name="budget">
+              <option value="">Vyberte rozpětí</option>
+              <option>do 5 000 Kč</option>
+              <option>5 000 - 10 000 Kč</option>
+              <option>10 000 - 20 000 Kč</option>
+              <option>20 000 - 40 000 Kč</option>
+              <option>40 000 Kč a víc</option>
+              <option>Potřebuju nejdřív nacenit</option>
+            </select>
+
+            <label for="context">Kde vás najdu?</label>
+            <input id="context" name="context" type="text" placeholder="Web, Instagram, název projektu nebo odkaz">
+
+            <label for="message">Co chcete ukázat?</label>
+            <textarea id="message" name="message" required placeholder="Napište mi pár vět o projektu, akci, značce nebo místě, kde se teď ztrácíte."></textarea>
+
+            <button class="button" type="submit">Poptat spolupráci</button>
+            <p class="form-note">Dočasně se otevře e-mail s vyplněnou poptávkou. Jakmile doplníme ID polí z Google Formuláře, odešle se rovnou do Googlu.</p>
+          </form>
         </div>
         <div class="contact-box" aria-label="Kontaktni informace">
-          <a href="mailto:gabriela.maceckova@seznam.cz">gabriela.maceckova@seznam.cz</a>
-          <a href="tel:+420732892370">+420 732 892 370</a>
+          <a id="contact-email" href="#" data-user="gabriela.maceckova" data-domain="seznam.cz">gabriela.maceckova [at] seznam.cz</a>
+          <a id="contact-phone" href="#" data-country="+420" data-a="732" data-b="892" data-c="370">+420 732 892 370</a>
         </div>
       </div>
     </section>
@@ -1304,6 +1399,45 @@
       <span>Reels / grafika / event obsah</span>
     </div>
   </footer>
+  <script>
+    const contactEmail = document.querySelector("#contact-email");
+    const contactPhone = document.querySelector("#contact-phone");
+    const leadForm = document.querySelector("#poptavka-form");
+
+    if (contactEmail) {
+      const address = `${contactEmail.dataset.user}@${contactEmail.dataset.domain}`;
+      contactEmail.textContent = address;
+      contactEmail.href = `mailto:${address}`;
+    }
+
+    if (contactPhone) {
+      const phone = `${contactPhone.dataset.country}${contactPhone.dataset.a}${contactPhone.dataset.b}${contactPhone.dataset.c}`;
+      contactPhone.href = `tel:${phone}`;
+    }
+
+    if (leadForm) {
+      leadForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const data = new FormData(leadForm);
+        const subject = `Poptavka spoluprace - ${data.get("service")}`;
+        const body = [
+          `Jmeno: ${data.get("name")}`,
+          `E-mail: ${data.get("email")}`,
+          `Typ spoluprace: ${data.get("service")}`,
+          `Termin: ${data.get("deadline") || "neuvedeno"}`,
+          `Budget: ${data.get("budget") || "neuvedeno"}`,
+          `Web / social / kontext: ${data.get("context") || "neuvedeno"}`,
+          "",
+          "Zprava:",
+          data.get("message")
+        ].join("\n");
+
+        const recipient = ["gabriela.g.maceckova", "gmail.com"].join("@");
+        window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      });
+    }
+  </script>
 </body>
 </html>
 
