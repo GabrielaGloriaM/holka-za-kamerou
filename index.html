@@ -300,6 +300,30 @@
       color: var(--lemon);
     }
 
+    .ostrava-signature {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 16px;
+      padding: 9px 12px;
+      border: 1px solid rgba(254, 201, 0, .72);
+      background: rgba(254, 201, 0, .12);
+      color: var(--lemon);
+      font-family: Impact, "Arial Black", Haettenschweiler, "Helvetica Neue", sans-serif;
+      font-size: 14px;
+      letter-spacing: .12em;
+      line-height: 1;
+      text-transform: uppercase;
+      transform: rotate(-1deg);
+    }
+
+    .ostrava-signature::before {
+      content: "●";
+      color: var(--lemon);
+      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      font-size: 11px;
+    }
+
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
@@ -824,6 +848,16 @@
       border-bottom: 0;
     }
 
+    .contact-location {
+      display: block;
+      padding-top: 14px;
+      color: var(--lemon);
+      font-family: Impact, "Arial Black", Haettenschweiler, "Helvetica Neue", sans-serif;
+      font-size: 18px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
     .lead-form {
       margin-top: 24px;
       padding: 24px;
@@ -1122,6 +1156,7 @@
             <span class="title-line">za kamerou.</span>
           </h1>
           <p class="lead">Pojďme spolu tvořit!</p>
+          <div class="ostrava-signature">Ostrava signature</div>
           <div class="hero-actions">
             <a class="button" href="#kontakt">Poptat spolupráci</a>
             <a class="button secondary" href="#ukazky">Kouknout na práci</a>
@@ -1384,6 +1419,7 @@
         <div class="contact-box" aria-label="Kontaktni informace">
           <a id="contact-email" href="#" data-user="gabriela.maceckova" data-domain="seznam.cz">gabriela.maceckova [at] seznam.cz</a>
           <a id="contact-phone" href="#" data-country="+420" data-a="732" data-b="892" data-c="370">+420 732 892 370</a>
+          <span class="contact-location">Ostrava / online / výjezdy</span>
         </div>
       </div>
     </section>
@@ -1407,7 +1443,7 @@
   <footer>
     <div class="wrap footer-inner">
       <span>© 2026 Holka za kamerou</span>
-      <span>Reels / grafika / event obsah</span>
+      <span>Ostrava signature / reels / grafika / event obsah</span>
     </div>
   </footer>
   <script>
