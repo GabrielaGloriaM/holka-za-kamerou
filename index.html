@@ -881,6 +881,16 @@
       font-size: 14px;
     }
 
+    .form-success {
+      display: none;
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-left: 4px solid var(--lemon);
+      background: rgba(254, 201, 0, .12);
+      color: #fff;
+      font-weight: 800;
+    }
+
     footer {
       padding: 28px 0;
       color: var(--muted);
@@ -1328,29 +1338,29 @@
           <h2>Pojďme natočit něco, co bude mít koule.</h2>
           <p>Napište mi, co děláte a co chcete lidem ukázat. Klidně i to, kde se v tom teď ztrácíte. Mrknu na to a navrhnu, co má smysl udělat jako první — strategicky, vizuálně i obsahově.</p>
           <a class="button" href="#poptavka-form">Poptat spolupráci</a>
-          <form class="lead-form" id="poptavka-form">
+          <form class="lead-form" id="poptavka-form" action="https://docs.google.com/forms/d/e/1FAIpQLSceYOpyvquaRSaMq-dn2XdcyiRVn7FDmUks3NcXUyd0UFbgoQ/formResponse" method="POST" target="google-form-target">
             <label for="name">Jméno</label>
-            <input id="name" name="name" type="text" autocomplete="name" required>
+            <input id="name" name="entry.1210562851" type="text" autocomplete="name" required>
 
             <label for="email">E-mail</label>
-            <input id="email" name="email" type="email" autocomplete="email" required>
+            <input id="email" name="entry.936189297" type="email" autocomplete="email" required>
 
             <label for="service">Co potřebujete?</label>
-            <select id="service" name="service" required>
+            <select id="service" name="entry.1284403132" required>
               <option value="">Vyberte typ spolupráce</option>
-              <option>Reels a krátká videa</option>
+              <option>Reels & krátká videa</option>
               <option>Brand & komplexní strategie</option>
               <option>Grafika pro sítě</option>
-              <option>Event content & management</option>
+              <option>Event content & managment</option>
               <option>Politický marketing</option>
               <option>Ještě přesně nevím</option>
             </select>
 
             <label for="deadline">Do kdy to potřebujete?</label>
-            <input id="deadline" name="deadline" type="text" placeholder="Např. do konce měsíce, na konkrétní event, nespěchá">
+            <input id="deadline" name="entry.408832227" type="text" placeholder="Např. do konce měsíce, na konkrétní event, nespěchá">
 
             <label for="budget">Orientační budget</label>
-            <select id="budget" name="budget">
+            <select id="budget" name="entry.477569888">
               <option value="">Vyberte rozpětí</option>
               <option>do 5 000 Kč</option>
               <option>5 000 - 10 000 Kč</option>
@@ -1361,14 +1371,16 @@
             </select>
 
             <label for="context">Kde vás najdu?</label>
-            <input id="context" name="context" type="text" placeholder="Web, Instagram, název projektu nebo odkaz">
+            <input id="context" name="entry.1893514789" type="text" placeholder="Web, Instagram, název projektu nebo odkaz">
 
             <label for="message">Co chcete ukázat?</label>
-            <textarea id="message" name="message" required placeholder="Napište mi pár vět o projektu, akci, značce nebo místě, kde se teď ztrácíte."></textarea>
+            <textarea id="message" name="entry.1778066890" required placeholder="Napište mi pár vět o projektu, akci, značce nebo místě, kde se teď ztrácíte."></textarea>
 
             <button class="button" type="submit">Poptat spolupráci</button>
-            <p class="form-note">Dočasně se otevře e-mail s vyplněnou poptávkou. Jakmile doplníme ID polí z Google Formuláře, odešle se rovnou do Googlu.</p>
+            <p class="form-note">Odpověď se odešle přes Google Forms. Bez Outlooku, bez dalšího kroku.</p>
+            <p class="form-success" id="form-success">Díky, poptávka je odeslaná. Ozvu se vám co nejdřív.</p>
           </form>
+          <iframe name="google-form-target" id="google-form-target" title="Skryté odeslání formuláře" style="display:none;"></iframe>
         </div>
         <div class="contact-box" aria-label="Kontaktni informace">
           <a id="contact-email" href="#" data-user="gabriela.maceckova" data-domain="seznam.cz">gabriela.maceckova [at] seznam.cz</a>
@@ -1403,6 +1415,9 @@
     const contactEmail = document.querySelector("#contact-email");
     const contactPhone = document.querySelector("#contact-phone");
     const leadForm = document.querySelector("#poptavka-form");
+    const formTarget = document.querySelector("#google-form-target");
+    const formSuccess = document.querySelector("#form-success");
+    let googleFormSubmitted = false;
 
     if (contactEmail) {
       const address = `${contactEmail.dataset.user}@${contactEmail.dataset.domain}`;
@@ -1415,26 +1430,16 @@
       contactPhone.href = `tel:${phone}`;
     }
 
-    if (leadForm) {
-      leadForm.addEventListener("submit", (event) => {
-        event.preventDefault();
+    if (leadForm && formTarget && formSuccess) {
+      leadForm.addEventListener("submit", () => {
+        googleFormSubmitted = true;
+      });
 
-        const data = new FormData(leadForm);
-        const subject = `Poptavka spoluprace - ${data.get("service")}`;
-        const body = [
-          `Jmeno: ${data.get("name")}`,
-          `E-mail: ${data.get("email")}`,
-          `Typ spoluprace: ${data.get("service")}`,
-          `Termin: ${data.get("deadline") || "neuvedeno"}`,
-          `Budget: ${data.get("budget") || "neuvedeno"}`,
-          `Web / social / kontext: ${data.get("context") || "neuvedeno"}`,
-          "",
-          "Zprava:",
-          data.get("message")
-        ].join("\n");
-
-        const recipient = ["gabriela.g.maceckova", "gmail.com"].join("@");
-        window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      formTarget.addEventListener("load", () => {
+        if (!googleFormSubmitted) return;
+        formSuccess.style.display = "block";
+        leadForm.reset();
+        googleFormSubmitted = false;
       });
     }
   </script>
